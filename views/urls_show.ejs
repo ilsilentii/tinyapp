@@ -1,18 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- <style>
+ul {
+  list-style-type: none;
+}
+.website {
+  width:300px;
+  height: 25px;
+  font-size: 20px;
+}
+.button {
+  position:absolute;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 17px;
+  background-color:white;
+  margin-left:22%;
+  margin-top:-32px;
+  width: 80px;
+  height: 33px;
+  border-radius: 2px;
+  color:#45484c;
+  border: 1px solid #cdd1d6;
+  transition: all 0.1s;
+  cursor: pointer;
+}
+.button:hover {
+  background-color: #5a6068;
+  color:#c9ced6;
+}
+</style> -->
   <title>TinyApp</title>
 </head>
 <body>
-    <div>
-      <h1>A list of URLs</h1>
-      <ul>
-
-      <li><%= shortURL %> - <%= urls[shortURL] %> </li>
-
-      </ul>
-
-
-    </div>
+    <form  method="POST" style="margin-left:30%;margin-top:16%" action=<%= "/urls/" + shortURL + "/update" %>>
+      <label class="font" for="longURL"><strong>Enter a URL:</strong></label>
+      <input class="website" id="longURL" type="text" name="longURL" placeholder="http://">
+      <button class="button" style="vertical-align:middle"><span>Submit </span></button>
+    </form>
 </body>
 </html>

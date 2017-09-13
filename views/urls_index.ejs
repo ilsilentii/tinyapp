@@ -2,13 +2,31 @@
 <html lang="en">
 <head>
   <title>TinyApp</title>
+  <style>
+  .delete {
+
+  }
+.update {
+
+
+}
+
+  </style>
 </head>
 <body>
     <div>
       <h1>A list of URLs</h1>
       <ul>
       <% for (keys in urls) { %>
-      <li><%= keys %> - <%= urls[keys] %> </li>
+      <li><%= keys %> - <%= urls[keys] %></li>
+      <br>
+      <form stylemethod="POST" action=<%= "/urls/" + keys + "/delete" %>>
+      <input type="submit" value="Delete">
+      </form>
+      <form method="POST" action=<%= "/urls/" + keys %>>
+      <input type="submit" value="Update">
+      </form>
+      <br>
       <% }; %>
       </ul>
 

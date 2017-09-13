@@ -14,6 +14,8 @@ var urlDatabase = {
   "9sm5xK": "http://www.google.com"
 };
 
+app.use(express.static("public")); //To grab images
+
 app.get("/urls", (req, res) => {
   let templateVars = {
     urls: urlDatabase,
@@ -21,7 +23,7 @@ app.get("/urls", (req, res) => {
   res.render("urls_index", templateVars);
 })
 
-app.get("/urls/new", (req, res) => {
+app.get("/tinyapp", (req, res) => {
   res.render("urls_new");
 });
 
@@ -31,7 +33,7 @@ app.get("/u/:shortURL", (req, res) => {
   res.redirect(longURL);
 });
 
-app.get("/urls/:id", (req, res) => {
+app.post("/urls/:id", (req, res) => {
   let templateVars = {
     urls: urlDatabase,
     shortURL: req.params.id
@@ -40,13 +42,30 @@ app.get("/urls/:id", (req, res) => {
 });
 
 
-app.post("/urls", (req, res) => {
-
+app.post("/urls/link", (req, res) => {
   var arr = randomString();
   urlDatabase[arr] = req.body.longURL;
-  str = '/u/' + arr;
-  res.send("Here is your new link: " + str.link('http://localhost:8080/u/' + arr)); // Respond with 'Ok' (we will replace this)
+  link = 'localhost:8080/u/' + arr;
+  res.render("urls_respond");
+  //res.send("Here is your new link: " + str.link('http://localhost:8080/u/' + arr)); // Respond with 'Ok' (we will replace this)
 
+});
+
+app.post("/urls/:id/update", (req, res) => {
+  console.log(req)
+  if (Object.keys(urlDatabase).indexOf(req.params.id) > -1) {
+    urlDatabase[req.params.id] = req.body.longURL
+    console.log("string")
+    res.redirect("/urls")
+  } else {
+    res.redirect("/urls")
+  }
+});
+
+app.post("/urls/:id/delete", (req, res) => {
+  if (Object.keys(urlDatabase).indexOf(req.params.id) > -1)
+    delete urlDatabase[req.params.id];
+  res.redirect("/urls")
 });
 
 app.listen(PORT, () => {
