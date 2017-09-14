@@ -1,7 +1,8 @@
 var express = require("express");
 var app = express();
 var PORT = process.env.PORT || 8080; // default port 8080
-
+var cookieParser = require('cookie-parser')
+app.use(cookieParser())
 const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({
   extended: true
@@ -17,11 +18,15 @@ var urlDatabase = {
 app.use(express.static("public")); //To grab images
 
 app.get("/urls", (req, res) => {
-  let templateVars = {
+
+  var templateVars = {
     urls: urlDatabase,
-  };
+    note: "You are currently not logged in at the moment",
+    username: req.cookies.username
+  }
+
   res.render("urls_index", templateVars);
-})
+});
 
 app.get("/tinyapp", (req, res) => {
   res.render("urls_new");
@@ -41,18 +46,44 @@ app.post("/urls/:id", (req, res) => {
   res.render("urls_show", templateVars);
 });
 
-
-app.post("/urls/link", (req, res) => {
-  var arr = randomString();
-  urlDatabase[arr] = req.body.longURL;
-  link = 'localhost:8080/u/' + arr;
-  res.render("urls_respond");
-  //res.send("Here is your new link: " + str.link('http://localhost:8080/u/' + arr)); // Respond with 'Ok' (we will replace this)
-
+app.post("/login", (req, res) => {
+  res.cookie('username', req.body.username);
+  res.redirect('/urls');
 });
 
+app.post("/logout", (req, res) => {
+  res.clearCookie('username');
+  res.redirect('/urls');
+});
+
+app.post("/getlink", (req, res) => {
+  if (req.body.longURL === "") {
+    res.redirect('/tinyapp')
+  } else {
+    var arr = randomString();
+    urlDatabase[arr] = req.body.longURL;
+    res.redirect('/urls');
+  }
+});
+
+
+/*app.post("/url", (req, res) => {
+  urlDatabase[] = req.body.longURL
+}
+res.redirect('/urls')
+})*/
+
+
+/*app.post("/url", (req, res) => {
+  var arr = randomString();
+  urlDatabase[arr] = req.body.longURL;
+  //link = 'localhost:8080/u/' + arr;
+  res.render("urls_index");
+  //res.send("Here is your new link: " + str.link('http://localhost:8080/u/' + arr)); // Respond with 'Ok' (we will replace this)
+
+});*/
+
 app.post("/urls/:id/update", (req, res) => {
-  console.log(req)
   if (Object.keys(urlDatabase).indexOf(req.params.id) > -1) {
     urlDatabase[req.params.id] = req.body.longURL
     console.log("string")
@@ -69,7 +100,7 @@ app.post("/urls/:id/delete", (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Running server on port ${PORT}!`);
+  console.log(`Running WEB SERVER on port ${PORT}!`);
 });
 
 function randomString(length, chars) {

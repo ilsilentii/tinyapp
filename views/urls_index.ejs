@@ -7,20 +7,32 @@
 
   }
 .update {
-
-
 }
-
   </style>
 </head>
 <body>
+
+<% if (username === "" || username === undefined) { %>
+<span><%= note %></span>
+<form action="/tinyapp" method="get">
+<button class="button1" style="vertical-align:middle"><span>Login </span></button>
+</form>
+
+<% } else { %>
+
+<span>You are logged in as: <%= username %></span>
+<form action="/logout" method="POST">
+<button class="button1" style="vertical-align:middle"><span>Logout </span></button>
+</form>
+<% }; %>
+
     <div>
       <h1>A list of URLs</h1>
       <ul>
       <% for (keys in urls) { %>
       <li><%= keys %> - <%= urls[keys] %></li>
       <br>
-      <form stylemethod="POST" action=<%= "/urls/" + keys + "/delete" %>>
+      <form method="POST" action=<%= "/urls/" + keys + "/delete" %>>
       <input type="submit" value="Delete">
       </form>
       <form method="POST" action=<%= "/urls/" + keys %>>
