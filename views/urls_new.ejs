@@ -1,99 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <form action="/login" method="POST" style="margin-left:30%;margin-top:16% float:left; margin-left:38%">
-      <label class="font1" for="username" style= "color:white;"><strong>Login Username:</strong></label>
-      <input class="website1" id="username" type="text" name="username" placeholder="Username">
-      <button class="button1" style="vertical-align:middle"><span>Login </span></button>
-    </form>
-
-  <title>aslkdfja;lskdjfas</title>
   <style>
-.font {
-  position:absolute;
-  padding-right:1%;
-  padding-top: 10%
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 28px;
-  color: #616a77;
-    text-shadow:
-    -1px -1px 0 #000,
-    1px -1px 0 #000,
-    -1px 1px 0 #000,
-    1px 1px 0 #000;
+  .body {
+  font-size:20px;
+  background-image: url(../images/background.jpg);
+  background-repeat: no-repeat;
+  background-size: 100%;
 }
-
-.website {
-position:absolute;
-margin-left:10%;
-margin-top:-10px;
-width: 400px;
-height:30px;
-padding-top: 5px;
-padding-bottom:4px;
-font-family: Arial, Helvetica, sans-serif;
-font-size: 25px;
-color: #85888c;
-font-weight:3em;
-transition: all 1s;
-border: 1px solid #a5aaaf;
-}
-
-.button {
-  position: absolute;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 17px;
-  background-color:#4e5d72;
-  margin-left:33%;
-  margin-top: -10px;
-  width: 130px;
-  height: 50px;
-  border-radius: 5px;
-  color:#c8daf4;
-  font-weight: bold;
-  border: 2px solid #303844;
-  transition: all 0.1s;
-  cursor: pointer;
-}
-.button:hover{
-  background-color: #596c7f;
-  color: #838e99;
-}
-.button span:after {
-  content: '\00bb';
-  position: absolute;
-  opacity: 0;
-  top: 0;
-  right: -20px;
-  transition: 0.5s;
-  color: black;
-}
-.button span {
-  cursor: pointer;
-  display: inline-block;
-  position: relative;
-  transition: 0.5s;
-}
-.button:hover span {
-  padding-right: 25px;
-}
-
-.button:hover span:after {
-  opacity: 1;
-  right: 0;
-}
-
-  </style>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+</style>
+<% include ./partial/header %>
   </head>
-  <body style = "font-size:20px; padding:50px; background-image: url(/images/design.jpg)">
-
-    <form action="/getlink" method="POST" style="margin-left:30%;margin-top:16%">
+  <body class = "body">
+    <form action="/getlink" method="POST" style="margin:auto; width:50%; margin-top:15em">
       <label class="font" for="longURL"><strong>Enter a URL:</strong></label>
-      <input class="website" id="longURL" type="text" name="longURL" placeholder="http://">
+      <input class="website" id="longURL" type="url" name="longURL" placeholder="http://">
       <button class="button" style="vertical-align:middle"><span>Submit </span></button>
     </form>
+
   </body>
 </html>
 

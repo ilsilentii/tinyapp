@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>TinyApp</title>
+<% include ./partial/header %>
+
   <style>
-  .delete {
-
-  }
-.update {
+  .body {
+  font-size:20px;
+  background-image: url(/images/background.jpg);
+  background-repeat: no-repeat;
+  background-size: 100%;
 }
-  </style>
-</head>
-<body>
+</style>
 
+  </head>
+<body class = "body">
 <% if (username === "" || username === undefined) { %>
 <span><%= note %></span>
 <form action="/tinyapp" method="get">
@@ -21,8 +23,12 @@
 <% } else { %>
 
 <span>You are logged in as: <%= username %></span>
-<form action="/logout" method="POST">
-<button class="button1" style="vertical-align:middle"><span>Logout </span></button>
+<form action="/logout" method="POST"><br>
+<button class="btn" style="vertical-align:middle; display: inline-block;"><span>Logout </span></button>
+</form>
+<br>
+<form action="/tinyapp" method="GET">
+<button class="btn" style="vertical-align:middle; display: inline-block;"><span>Create a new Link </span></button>
 </form>
 <% }; %>
 
@@ -41,6 +47,8 @@
       <br>
       <% }; %>
       </ul>
+
+
 
 
     </div>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+  <% include ./partial/header %>
+  <style>
+.body {
+  font-size:20px;
+  background-image: url(../images/background.jpg);
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
+  .login {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 75px;
+  text-align: center;
+  margin-top:15%;
+}
+.email {
+  margin-left:44.3%;
+}
+.password {
+  margin-left:43%;
+}
+.button1 {
+  margin-left:48%;
+}
+    </style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body class = "body">
+<h1 class = "login">Login</h1>
+
+    <form action="/login" method="POST">
+      <label class="email" for="email" style= "color:black;"><strong>Email:</strong></label>
+      <input class="username" id="email" type="email" name="email" placeholder="email@example.com">
+    <br>
+    <br>
+      <label class="password" for="password" style= "color:black;"><strong>Password:</strong></label>
+      <input class="username" id="password" type="password" name="password" placeholder="Password">
+    <br>
+    <br>
+    <button class="button1" style="vertical-align:middle"><span>Login </span></button>
+    </form>
+    <br>
+    <br>
+    <span style = "margin-left:45.5%;"><%= error %></span>
+
+
+  </body>
+</html>
