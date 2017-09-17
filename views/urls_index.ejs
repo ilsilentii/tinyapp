@@ -27,7 +27,7 @@
 <button class="btn" style="vertical-align:middle; display: inline-block;"><span>Logout </span></button>
 </form>
 <br>
-<form action="/tinyapp" method="GET">
+<form action="/mainpage" method="POST">
 <button class="btn" style="vertical-align:middle; display: inline-block;"><span>Create a new Link </span></button>
 </form>
 <% }; %>
@@ -36,7 +36,7 @@
       <h1>A list of URLs</h1>
       <ul>
       <% for (keys in urls) { %>
-      <li><%= keys %> - <%= urls[keys] %></li>
+      <li><%= keys %> - <%= urls[keys] %> - This link was created by <%= account %></li>
       <br>
       <form method="POST" action=<%= "/urls/" + keys + "/delete" %>>
       <input type="submit" value="Delete">
@@ -47,10 +47,6 @@
       <br>
       <% }; %>
       </ul>
-
-
-
-
     </div>
 </body>
 </html>

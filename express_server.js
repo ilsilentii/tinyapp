@@ -15,7 +15,6 @@ app.use(cookieSession({
 }))
 
 
-
 const bcrypt = require('bcrypt');
 app.use(cookieParser())
 const bodyParser = require("body-parser");
@@ -31,7 +30,8 @@ var urlDatabase = {
     "9sm5xK": "http://www.google.com"
   }
 };
-// const url_links = []
+
+
 
 const users = {
   "userRandomID": {
@@ -54,6 +54,7 @@ app.get("/urls", (req, res) => {
 
   var templateVars = {
     urls: urlDatabase[req.session.id],
+    account: [req.session.id],
     note: "You are currently not logged in at the moment",
     username: users[req.session.id].id + ". The email associated with this account is: " + users[req.session.id].email
   }
@@ -62,7 +63,19 @@ app.get("/urls", (req, res) => {
 });
 
 app.get("/tinyapp", (req, res) => {
-  res.render("urls_new")
+  templateVars = {
+    urls: "",
+    account: ""
+  }
+  res.render("urls_new", templateVars)
+});
+
+app.post("/mainpage", (req, res) => {
+  templateVars = {
+    urls: urlDatabase[req.session.id],
+    account: [req.session.id]
+  }
+  res.render("urls_new", templateVars)
 });
 
 app.get("/u/:shortURL", (req, res) => {

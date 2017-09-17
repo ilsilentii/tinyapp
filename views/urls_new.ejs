@@ -9,7 +9,7 @@
   background-size: 100%;
 }
 </style>
-<% include ./partial/header %>
+ <% include ./partial/header %>
   </head>
   <body class = "body">
     <form action="/getlink" method="POST" style="margin:auto; width:50%; margin-top:15em">
@@ -17,6 +17,19 @@
       <input class="website" id="longURL" type="url" name="longURL" placeholder="http://">
       <button class="button" style="vertical-align:middle"><span>Submit </span></button>
     </form>
+
+<span style = "position:absolute;color:white; margin-left: 80%; margin-top:-9.5%;">You are currently logged in as: <%= account %></span>
+
+    <div style = "margin-left:36%;">
+    <br>
+    <br>
+      <h1>A list of URLs</h1>
+      <ul>
+      <% for (keys in urls) { %>
+      <li><%= keys %> - <%= urls[keys] %> - This link was created by <%= account %></li>
+      <% }; %>
+      </ul>
+    </div>
 
   </body>
 </html>
