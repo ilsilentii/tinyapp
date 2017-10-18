@@ -1,3 +1,7 @@
+# TinyApp
+
+TinyApp is a small web application that shortens URL links
+
 ## Getting Started
 
 
