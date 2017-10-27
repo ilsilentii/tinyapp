@@ -52,6 +52,7 @@ app.use(express.static("public")); //To grab images
 
 app.get("/urls", (req, res) => {
 
+
     var templateVars = {
         urls: urlDatabase[req.session.id],
         account: [req.session.id],
@@ -65,15 +66,17 @@ app.get("/urls", (req, res) => {
 app.get("/", (req, res) => {
     templateVars = {
         urls: "",
-        account: ""
+        account: "",
+        username: null
     }
     res.render("urls_new", templateVars)
 });
 
-app.post("/mainpage", (req, res) => {
+app.post("/", (req, res) => {
     templateVars = {
         urls: urlDatabase[req.session.id],
-        account: [req.session.id]
+        account: [req.session.id],
+        username: [req.session.id]
     }
     res.render("urls_new", templateVars)
 });

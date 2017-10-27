@@ -1,36 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-  <style>
-  .body {
-  font-size:20px;
-  background-image: url(../images/background.jpg);
-  background-repeat: no-repeat;
-  background-size: 100%;
-}
-</style>
- <% include ./partial/header %>
-  </head>
-  <body class = "body">
+
+<head>
+    <style>
+    .body {
+        font-size: 20px;
+        background-image: url(../images/background.jpg);
+        background-repeat: no-repeat;
+        background-size: 100%;
+    }
+    </style>
+    <% include ./partial/header %>
+</head>
+
+<body class="body">
     <form action="/getlink" method="POST" style="margin:auto; width:50%; margin-top:15em">
-      <label class="font" for="longURL"><strong>Enter a URL:</strong></label>
-      <input class="website" id="longURL" type="url" name="longURL" placeholder="http://">
-      <button class="button" style="vertical-align:middle"><span>Submit </span></button>
+        <% if (username) { %>
+            <label class="font" for="longURL"><strong>Enter a URL:</strong></label>
+            <input class="website" id="longURL" type="url" name="longURL" placeholder="http://">
+            <button class="button" style="vertical-align:middle"><span>Submit </span></button>
+            <% } %>
     </form>
-
-<span style = "position:absolute;color:white; margin-left: 80%; margin-top:-9.5%;">You are currently logged in as: <%= account %></span>
-
-    <div style = "margin-left:36%;">
-    <br>
-    <br>
-      <h1>A list of URLs</h1>
-      <ul>
-      <% for (keys in urls) { %>
-      <li><%= keys %> - <%= urls[keys] %> - This link was created by <%= account %></li>
-      <% }; %>
-      </ul>
+    <span style="position:absolute;color:white; margin-left: 80%; margin-top:-9.5%;">You are currently logged in as: <%= account %></span>
+    <div style="margin-left:36%;">
+        <br>
+        <br>
+        <% if (username) { %>
+            <h1>A list of URLs</h1>
+            <% } %>
+                <ul>
+                    <% for (keys in urls) { %>
+                        <li>
+                            <%= keys %> -
+                                <%= urls[keys] %> - This link was created by
+                                    <%= account %>
+                        </li>
+                        <% }; %>
+                </ul>
     </div>
+</body>
 
-  </body>
 </html>
-

@@ -1,52 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<% include ./partial/header %>
+    <% include ./partial/header %>
+        <style>
+        .body {
+            font-size: 20px;
+            background-image: url(/images/background.jpg);
+            background-repeat: no-repeat;
+            background-size: 100%;
+        }
+        </style>
+</head>
 
-  <style>
-  .body {
-  font-size:20px;
-  background-image: url(/images/background.jpg);
-  background-repeat: no-repeat;
-  background-size: 100%;
-}
-</style>
-
-  </head>
-<body class = "body">
-<% if (username === "" || username === undefined) { %>
-<span><%= note %></span>
-<form action="/tinyapp" method="get">
-<button class="button1" style="vertical-align:middle"><span>Login </span></button>
-</form>
-
-<% } else { %>
-
-<span>You are logged in as: <%= username %></span>
-<form action="/logout" method="POST"><br>
-<button class="btn" style="vertical-align:middle; display: inline-block;"><span>Logout </span></button>
-</form>
-<br>
-<form action="/mainpage" method="POST">
-<button class="btn" style="vertical-align:middle; display: inline-block;"><span>Create a new Link </span></button>
-</form>
-<% }; %>
-
-    <div>
-      <h1>A list of URLs</h1>
-      <ul>
-      <% for (keys in urls) { %>
-      <li><%= keys %> - <%= urls[keys] %> - This link was created by <%= account %></li>
-      <br>
-      <form method="POST" action=<%= "/urls/" + keys + "/delete" %>>
-      <input type="submit" value="Delete">
-      </form>
-      <form method="POST" action=<%= "/urls/" + keys %>>
-      <input type="submit" value="Update">
-      </form>
-      <br>
-      <% }; %>
-      </ul>
-    </div>
+<body class="body">
+    <% if (username === "" || username === undefined) { %>
+        <span><%= note %></span>
+        <form action="/" method="get">
+            <button class="button1" style="vertical-align:middle"><span>Login </span></button>
+        </form>
+        <% } else { %>
+            <span>You are logged in as: <%= username %></span>
+            <form action="/" method="POST">
+                <br>
+                <button class="btn" style="vertical-align:middle; display: inline-block;"><span>Logout </span></button>
+            </form>
+            <br>
+            <form action="/" method="POST">
+                <button class="btn" style="vertical-align:middle; display: inline-block;"><span>Create a new Link </span></button>
+            </form>
+            <% }; %>
+                <div>
+                    <h1>A list of URLs</h1>
+                    <ul>
+                        <% for (keys in urls) { %>
+                            <li>
+                                <%= keys %> -
+                                    <%= urls[keys] %> - This link was created by
+                                        <%= account %>
+                            </li>
+                            <br>
+                            <form method="POST" action=<%="/urls/" + keys + "/delete" %>>
+                                <input type="submit" value="Delete">
+                            </form>
+                            <form method="POST" action=<%="/urls/" + keys %>>
+                                <input type="submit" value="Update">
+                            </form>
+                            <br>
+                            <% }; %>
+                    </ul>
+                </div>
 </body>
+
 </html>
